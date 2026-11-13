@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IQ Atlas</title>
+<style>
+  body { margin: 0; font-family: system-ui, sans-serif; background: #0B1440; color: #fff; display: flex; min-height: 100vh; align-items: center; justify-content: center; text-align: center; }
+  main { padding: 24px; max-width: 420px; }
+  a.btn { display: block; margin: 18px 0; padding: 16px; border-radius: 14px; background: #FFD54A; color: #1A1E3A; font-weight: 800; font-size: 18px; text-decoration: none; }
+  .code { font-size: 40px; font-weight: 800; letter-spacing: 6px; color: #FFD54A; }
+  p { color: #C9D1FF; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🧠 IQ Atlas</h1>
+  <p id="what">Kamarát ťa pozýva do hry.</p>
+  <div class="code" id="code"></div>
+  <a class="btn" id="open" href="iqapp://">Otvoriť v aplikácii IQ Atlas</a>
+  <p>Ak sa aplikácia neotvorí, otvor IQ Atlas a zadaj kód ručne.</p>
+</main>
+<script>
+  var q = new URLSearchParams(location.search);
+  var routes = { duel: 'duels', chess: 'chess', puck: 'puck-online', group: 'groups' };
+  var names = { duel: 'súboj', chess: 'šach', puck: 'puky', group: 'skupinu' };
+  var t = routes[q.get('t')] ? q.get('t') : 'duel';
+  var c = (q.get('c') || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 8);
+  var url = 'iqapp://' + routes[t] + (c ? '?code=' + c : '');
+  document.getElementById('code').textContent = c;
+  document.getElementById('what').textContent = 'Kamarát ťa pozýva na ' + names[t] + ' v IQ Atlas.';
+  document.getElementById('open').href = url;
+  if (c) location.href = url;
+</script>
+</body>
+</html>
