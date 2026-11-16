@@ -23,7 +23,7 @@
 <script>
   var q = new URLSearchParams(location.search);
   var routes = { duel: 'duels', chess: 'chess', puck: 'puck-online', group: 'groups', prsi: 'prsi' };
-  var names = { duel: 'súboj', chess: 'šach', puck: 'puky', group: 'skupinu', prsi: 'Prší' };
+  var names = { duel: 'súboj', chess: 'šach', puck: 'puky', group: 'skupinu', prsi: 'Sedma bere Tri' };
   var t = routes[q.get('t')] ? q.get('t') : 'duel';
   var c = (q.get('c') || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 8);
   var url = 'iqapp://' + routes[t] + (c ? '?code=' + c : '');
