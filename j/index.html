@@ -22,13 +22,15 @@
 </main>
 <script>
   var q = new URLSearchParams(location.search);
-  var routes = { duel: 'duels', chess: 'chess', puck: 'puck-online', group: 'groups', prsi: 'prsi', poker: 'poker', atlas: 'atlasman-duo' };
-  var names = { duel: 'súboj', chess: 'šach', puck: 'puky', group: 'skupinu', prsi: 'Sedma bere Tri', poker: 'Poker', atlas: 'Atlas v bludisku vo dvojici' };
+  var routes = { duel: 'duels', chess: 'chess', puck: 'puck-online', group: 'groups', prsi: 'prsi', poker: 'poker', atlas: 'atlasman-duo', friend: 'kamarati' };
+  var names = { duel: 'súboj', chess: 'šach', puck: 'puky', group: 'skupinu', prsi: 'Sedma bere Tri', poker: 'Poker', atlas: 'Atlas v bludisku vo dvojici', friend: 'friend' };
   var t = routes[q.get('t')] ? q.get('t') : 'duel';
   var c = (q.get('c') || '').replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 8);
   var url = 'iqapp://' + routes[t] + (c ? '?code=' + c : '');
   document.getElementById('code').textContent = c;
-  document.getElementById('what').textContent = 'Kamarát ťa pozýva na ' + names[t] + ' v IQ Atlas.';
+  document.getElementById('what').textContent = t === 'friend'
+    ? 'Kamarát si ťa chce pridať do zoznamu kamarátov v IQ Atlas.'
+    : 'Kamarát ťa pozýva na ' + names[t] + ' v IQ Atlas.';
   document.getElementById('open').href = url;
   if (c) location.href = url;
 </script>
